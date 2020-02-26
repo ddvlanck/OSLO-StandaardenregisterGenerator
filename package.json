@@ -1,0 +1,24 @@
+{
+  "name": "oslo-standaardenregistergenerator",
+  "version": "1.0.0",
+  "description": "Creates a HTML page from JSON data",
+  "main": "html_page_generator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddvlanck/OSLO-StandaardenregisterGenerator.git"
+  },
+  "author": "Dwight Van Lancker - Informatie Vlaanderen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ddvlanck/OSLO-StandaardenregisterGenerator/issues"
+  },
+  "homepage": "https://github.com/ddvlanck/OSLO-StandaardenregisterGenerator#readme",
+  "dependencies": {
+    "commander": "^4.1.1",
+    "fs": "0.0.1-security",
+    "nunjucks": "^3.2.0"
+  }
+}
