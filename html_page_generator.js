@@ -27,14 +27,19 @@ const content = fs.readFileSync(program.file);
 const configuration = JSON.parse(content.toString());
 
 if(program.description){
+    console.log('[StandaardenregisterGenerator]: a description was provided')
     const description = fs.readFileSync(program.description.toString()).toString();
     const tempFilePath = tmp.sync(description);
     configuration.description = tempFilePath;
-}
 
-nunjucks.configure(['./templates', configuration.description], {
-    autoescape: true
-});
+    nunjucks.configure(['./templates', configuration.description], {
+        autoescape: true
+    });
+} else {
+    nunjucks.configure('./templates', {
+        autoescape: true
+    });
+}
 
 const html = nunjucks.render('body.j2', configuration);
 const data = new Uint8Array(Buffer.from(html));
