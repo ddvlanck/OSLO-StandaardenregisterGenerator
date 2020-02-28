@@ -10,7 +10,7 @@ program
     .usage('node html-generator.js creates html pages for json file of OSLOthema repositories')
     .option('-f, --file <target>', 'Location of configuration file of the repository for which template must be built')
     .option('-o, --output <target>', 'Location where the HTML page should be saved')
-    .option('-d, --description <target>', 'Location of the HTML page that contains the description of the repo in the standards register');
+    .option('-t, --text <target>', 'Location of the HTML page that contains the description of the repo in the standards register');
 
 program.on('--help', function(){
     console.log('')
@@ -18,7 +18,7 @@ program.on('--help', function(){
 
 program.parse(process.argv);
 
-let output = program.output || '.';
+let output = program.output || './result.html';
 if(output.charAt(output.length-1) === '/'){
     output = output.substring(0, output.length - 1);
 }
@@ -26,9 +26,9 @@ if(output.charAt(output.length-1) === '/'){
 const content = fs.readFileSync(program.file);
 const configuration = JSON.parse(content.toString());
 
-if(program.description){
-    console.log('[StandaardenregisterGenerator]: a description was provided')
-    const description = fs.readFileSync(program.description.toString()).toString();
+if(program.text){
+    console.log('[StandaardenregisterGenerator]: a description was provided.')
+    const description = fs.readFileSync(program.text.toString()).toString();
     const tempFilePath = tmp.sync(description);
     configuration.description = tempFilePath;
 
@@ -36,6 +36,7 @@ if(program.description){
         autoescape: true
     });
 } else {
+    console.log('[StandaardenregisterGenerator]: no text was provided. Description in the HTML page will be empty.')
     nunjucks.configure('./templates', {
         autoescape: true
     });
