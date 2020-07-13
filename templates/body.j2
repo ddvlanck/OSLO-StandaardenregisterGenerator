@@ -113,10 +113,24 @@
                             <h1 class="spotlight__title">Aanvullende documentatie</h1>
                             <h2 class="spotlight__subtitle">Niet-normatief</h2>
                             <div class="spotlight__data">
+                            {% if charter | length > 0 %}
+                              {% for item in charter %}
+                               {% if 'https://' in item.waarde %}
+                                <div class="spotlight__data__value">
+                                    <a href="{{ item.waarde }}">{{ item.naam }}</a>
+                                </div>
+                               {% else %}
+                                <div class="spotlight__data__value">
+                                    <a href="{{ baseURL }}/charter/{{ item.waarde }}">{{ item.naam }}</a>
+                                </div>
+                               {% endif %}
+                              {% endfor %}
+                            {% endif %}
+
                             {% if documentatie | length > 0 %}
                                 {% for doc in documentatie %}
                                 <div class="spotlight__data__value">
-                                    <a href="{{ doc.waarde }}">{{ doc.naam }}</a>
+                                    <a href="{{ baseURL}}/documents/{{ doc.waarde }}">{{ doc.naam }}</a>
                                 </div>
                                 {% endfor %}
                             {% else %}
@@ -133,20 +147,6 @@
                         <article class="spotlight">
                             <h1 class="spotlight__title">Verslagen van werkgroepvergaderingen</h1>
                             <div class="spotlight__data">
-                            {% if charter | length > 0 %}
-                             {% for item in charter %}
-                                {% if 'https://' in item.waarde %}
-                                <div class="spotlight__data__value">
-                                    <a href="{{ item.waarde }}">{{ item.naam }}</a>
-                                </div>
-                                {% else %}
-                                <div class="spotlight__data__value">
-                                    <a href="{{ baseURL }}/charter/{{ item.waarde }}">{{ item.naam }}</a>
-                                </div>
-                                {% endif %}
-                             {% endfor %}
-                            {% endif %}
-
                             {% if verslagen | length > 0 %}
                              {% for item in verslagen %}
                                 {% if 'https://' in item.waarde %}
@@ -155,7 +155,7 @@
                                 </div>
                                 {% else %}
                                 <div class="spotlight__data__value">
-                                    <a href="{{ baseURL}}/verslagen/{{ item.waarde }}">{{ item.naam }}</a>
+                                    <a href="{{ baseURL}}/reports/{{ item.waarde }}">{{ item.naam }}</a>
                                 </div>
                                 {% endif %}
                              {% endfor %}
@@ -176,7 +176,7 @@
                                 </div>
                                 {% else %}
                                 <div class="spotlight__data__value">
-                                    <a href="{{ baseURL }}/presentaties/{{ item.waarde }}">{{ item.naam }}</a>
+                                    <a href="{{ baseURL }}/presentations/{{ item.waarde }}">{{ item.naam }}</a>
                                 </div>
                                 {% endif %}
                               {% endfor %}
