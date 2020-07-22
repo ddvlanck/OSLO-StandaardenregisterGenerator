@@ -113,30 +113,32 @@
                             <h1 class="spotlight__title">Aanvullende documentatie</h1>
                             <h2 class="spotlight__subtitle">Niet-normatief</h2>
                             <div class="spotlight__data">
-                            {% if charter | length > 0 %}
-                              {% for item in charter %}
-                               {% if 'https://' in item.waarde %}
-                                <div class="spotlight__data__value">
-                                    <a href="{{ item.waarde }}">{{ item.naam }}</a>
-                                </div>
-                               {% else %}
-                                <div class="spotlight__data__value">
-                                    <a href="{{ baseURL }}/charter/{{ item.waarde }}">{{ item.naam }}</a>
-                                </div>
-                               {% endif %}
-                              {% endfor %}
-                            {% endif %}
-
-                            {% if documentatie | length > 0 %}
-                                {% for doc in documentatie %}
-                                <div class="spotlight__data__value">
-                                    <a href="{{ baseURL}}/documents/{{ doc.waarde }}">{{ doc.naam }}</a>
-                                </div>
-                                {% endfor %}
-                            {% else %}
+                            {% if ( charter | length == 0 ) and ( documentatie | length == 0 ) %}
                                 <div class="spotlight__data__value">
                                     Niet beschikbaar
                                 </div>
+                            {% else %}
+                                {% if charter | length > 0 %}
+                                    {% for item in charter %}
+                                        {% if 'https://' in item.waarde %}
+                                            <div class="spotlight__data__value">
+                                                <a href="{{ item.waarde }}">{{ item.naam }}</a>
+                                            </div>
+                                        {% else %}
+                                            <div class="spotlight__data__value">
+                                                <a href="{{ baseURL }}/charter/{{ item.waarde }}">{{ item.naam }}</a>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if documentatie | length > 0 %}
+                                    {% for doc in documentatie %}
+                                        <div class="spotlight__data__value">
+                                            <a href="{{ baseURL}}/documents/{{ doc.waarde }}">{{ doc.naam }}</a>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
                             {% endif %}
                             </div>
                         </article>
