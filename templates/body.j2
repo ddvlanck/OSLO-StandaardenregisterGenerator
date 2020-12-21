@@ -142,9 +142,15 @@
 
                                 {% if documentatie | length > 0 %}
                                     {% for doc in documentatie %}
-                                        <div class="spotlight__data__value">
-                                            <a href="{{ baseURL}}/documents/{{ doc.waarde }}">{{ doc.naam }}</a>
-                                        </div>
+                                        {% if 'https://' in doc.waarde %}
+                                            <div class="spotlight__data__value">
+                                                <a href="{{ doc.waarde }}">{{ doc.naam }}</a>
+                                            </div>
+                                        {% else %}
+                                            <div class="spotlight__data__value">
+                                                <a href="{{ baseURL }}/documents/{{ doc.waarde }}">{{ doc.naam }}</a>
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
                                 {% endif %}
                             {% endif %}
@@ -211,6 +217,9 @@
                         <li class="bullet-list__item"><strong>Functioneel toepassingsgebied:</strong> {{ functioneel_toepassingsgebied }}</li>
                         <li class="bullet-list__item"><strong>Organisatorisch werkingsgebied:</strong> {{ organisatorisch_werkingsgebied }}</li>
                         <li class="bullet-list__item"><strong>Datum van aanmelding:</strong> {{ datum_van_aanmelding }}</li>
+                         {% if datum_einde_review %}
+                         <li class="bullet-list__item"><strong>Einde publieke review:</strong> {{ datum_einde_review }}</li>
+                         {% endif %}
                         <li class="bullet-list__item"><strong>Erkenning door werkgroep datastandaarden:</strong> {{ erkenning_werkgroep_datastandaarden }}</li>
                         <li class="bullet-list__item"><strong>Erkenning door stuurorgaan Vlaams Informatie- en ICT-beleid:</strong> {{ erkenning_stuurgroep }}</li>
                     </ul>
